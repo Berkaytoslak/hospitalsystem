@@ -33,14 +33,7 @@ public class UserEntity extends BaseEntity {
     @Column
     private boolean isEnable;
 
-
-    /*@JoinTable(name = "user_group",joinColumns = @JoinColumn(name="user_id"))
-    @JoinColumn(name = "group_id")
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Group> group;*/
-
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JoinColumn(name = "role_id", nullable = false)

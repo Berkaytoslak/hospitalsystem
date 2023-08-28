@@ -33,7 +33,7 @@ public class SecurityConfiguration {
     private SecurityService uds;
 
 
-    //TODO USER ADMİN VE DOCTOR ROLLERİNİ EKLE
+    // Burada olan apiler her kullanıcının ulaştığı url ler
     private static final String[] AUTH_WHITELIST = {
             "/auth/**",
             "/swagger-ui/**",
@@ -45,19 +45,40 @@ public class SecurityConfiguration {
             "/api/public/**",
             "/api/public/authenticate",
             "/actuator/*",
-            "/swagger-ui/**",
-            "/tax",
-            "/tax/**",
-            "/category/**",
-            "/category",
-            "/product/**",
-            "/product"
+            "/swagger-ui/**"
 
     };
 
 
     private static final String[] USER_AUTH_WHITELIST = {
-            "/selam"
+            "/patient",
+            "/patient/**",
+            "/reservation",
+            "/reservation/**",
+            "/flight/**",
+            "/room/**",
+            "/hotel/**",
+            "/doctor/**"
+
+    };
+    private static final String[] ADMIN_AUTH_WHITELIST = {
+            "/patient",
+            "/patient/**",
+            "/hospital",
+            "/hospital/**",
+            "/doctor",
+            "/doctor/**",
+            "/hotel",
+            "/hotel/**",
+            "/room",
+            "/room/**",
+            "/flight",
+            "/flight/**"
+
+    };
+    private static final String[] DOCTOR_AUTH_WHITELIST = {
+            "/prescriptions",
+            "/prescriptions/**"
 
     };
 
@@ -80,8 +101,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
                 .requestMatchers(USER_AUTH_WHITELIST).hasRole("user")
-                .requestMatchers(USER_AUTH_WHITELIST).hasRole("admin")
-                .requestMatchers(USER_AUTH_WHITELIST).hasRole("doctor")
+                .requestMatchers(ADMIN_AUTH_WHITELIST).hasRole("admin")
+                .requestMatchers(DOCTOR_AUTH_WHITELIST).hasRole("doctor")
                 .and()
 
                 .userDetailsService(uds)

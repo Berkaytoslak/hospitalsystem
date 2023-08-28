@@ -41,10 +41,6 @@ public class SecurityService implements UserDetailsService {
         return new User(
                 userEntity.getEmail(),
                 userEntity.getPassword(),
-                userEntity.isEnable(),
-                true,
-                true,
-                true,
                 authorities);
     }
 
